@@ -47,6 +47,8 @@ def Waduzitdo(source):
             elif CBUF=="A" :
                 
                 Acc = GetString()
+                if(Acc.isnumeric()):
+                    Acc=int(Acc)
                 Last=Loc
                 Loc+=1
                 tmp=""
@@ -62,15 +64,47 @@ def Waduzitdo(source):
             elif CBUF=="M":
                 Loc+=1
                 if source[Loc].isnumeric():
-                    Flg="Y" if VAcc[int(source[Loc])]==VAcc[int(source[Loc+2])] else "N"
-                else:
-                    tmp=""
-                    while Loc<End and CBUF!="\r" and CBUF!="\n":
+                    isourceloc = int(source[Loc])
+                    Loc+=2
+                    nstr="";
+                    while Loc<End and source[Loc]!="\r" and source[Loc]!="\n":
+                        if source[Loc]=="$":
+                          if source[Loc+1]=="$":
+                                nstr+="$"
+                                Loc+=1
+                          else:
+                             Loc+=1
+                             nstr=source[Loc]
+                             if nstr.isnumeric():
+                                nstr=VAcc[int(nstr)]
+                             elif nstr=="A":
+                                nstr=Acc;
+                        else:
+                            nstr+=source[Loc]
                         Loc+=1
-                        if source[Loc]!="\r" and source[Loc] !="\n":
-                            tmp+=source[Loc]
-                        CBUF=source[Loc]
-                    Flg= "Y" if tmp==Acc else "N"
+
+                    if(nstr.isnumeric()):
+                        nstr=int(nstr)
+                    Flg="Y" if VAcc[int(isourceloc)]==nstr else "N"
+                else:
+                    Loc+=1
+                    nstr=""
+                    while Loc<End and source[Loc]!="\r" and source[Loc]!="\n":
+                        if source[Loc]=="$":
+                          if source[Loc+1]=="$":
+                                nstr+="$"
+                                Loc+=1
+                          else:
+                             Loc+=1
+                             nstr=source[Loc]
+                             if nstr.isnumeric():
+                                nstr=VAcc[int(nstr)]
+                             elif nstr=="A":
+                                nstr=Acc;
+                        else:
+                            nstr+=source[Loc]
+                        Loc+=1
+                    Flg= "Y" if nstr==Acc else "N"
 
             elif CBUF=="J":
                 Loc+=2

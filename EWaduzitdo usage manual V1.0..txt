@@ -1,0 +1,108 @@
+EWaduzitdo usage manual V1.0.
+By Petar Jovanovic
+<c> 2024-2030 JP Programi
+
+* Command Format:
+Command format is the same as in Waduzitdo.
+
+[<Modifier>] <Operation>:<Data> 
+
+* Variable Accumulator (VAcc)
+According to the previous standard of waduzitdo, there was an Accumulator used for character input (Acc).
+EWaduzitdo, in the same spirit, adds a variable accumulator with indices of 0-9 for available variable "slots".
+
+They are accessed using the following way:
+<VARIABLE INDEX>:<VARIABLE/LITERAL>
+
+Example:
+0:ABCD
+or
+0:1234
+
+The command can also have a preceding * (In the following text, named STAR).
+
+Accessing variables in the VAcc during assignment and other operations can be done using the dollar sign ($).
+
+Example:
+
+0:$0
+or
+0:$3
+
+Dollarsigns in string literals are escaped using $$.
+
+The special variable, $A represents Waduzitdo's original string accumulator after the A: command.
+
+* Mathematical operations:
+
+Mathematical operations are done in the following manner:
+<VARIABLE><OPERATION>:<VARIABLE/LITERAL>
+
+Example:
+
+0+:$0
+or
+0+:123
+
+Available operations are addition (+), subtraction (-), multiplication (*) and division (/). The addition operation works for string values and variables by concatenating them.
+
+* Accepting input
+
+Accepting input is done using the original command A: .
+To accept input into a variable in the VAcc is done A:<VARIABLE INDEX>
+
+Example:
+
+A:0
+
+As there are no other possible values after the A: command, there's no need to use the $ here. Calling the empty A: command will work the same way it did in original Waduzitdo, by adding the input to the accumulator.
+Input can now be a string as per Waduzitdo 2001 specifications.
+Numerical inputs assigned to the VAcc are recognized as numeric literals, not strings.
+
+* Peeking the VAcc
+
+You can show a variable from the VAcc or the accumulator itself by using the Peek (or Print) command (P).
+
+P:<VARIABLE>
+
+Example:
+
+P:0
+
+This will produce the output of the variable slot from the VAcc. Note that this output DOES NOT ADVANCE the line.
+
+* Matching variables
+
+The Match command (M) can now match variables as well as the accumulator. 
+You can use the match command the same way as it was used in original Waduzitdo, but you can also match variables by calling the
+M<VARIABLE INDEX>:<VARIABLE/LITERAL>
+
+Example:
+M:123
+or
+M0:123
+or
+M1:ABCD
+or
+M1:$0
+
+Matching a variable slot to itself (M0:$0) will always give you a true value.
+
+* Increment / Decrement
+
+You can now increment and decrement variables by using the I and D commands.
+
+Example:
+
+I:0
+
+or 
+
+D:0
+
+* Stopping the program
+
+Stopping the program is done with the S: command.
+
+
+
