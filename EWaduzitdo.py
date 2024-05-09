@@ -173,29 +173,29 @@ def Waduzitdo(source):
                         nstr+=source[Loc]
                     Loc+=1
                 if op=="asg":
-                    if nstr.isnumeric():
+                    if type(nstr) is int:
                         VAcc[int(CBUF)]=int(nstr)
                     else:
                         VAcc[int(CBUF)]=nstr
                 elif op=="+":
-                    if nstr.isnumeric():
+                    if type(nstr) is int:
                         VAcc[int(CBUF)]+=int(nstr)
                     else:
                         VAcc[int(CBUF)]+=nstr
                 elif op=="-":
-                    if nstr.isnumeric():
+                    if type(nstr) is int:
                         VAcc[int(CBUF)]-=int(nstr)
                     else:
                         print("Error : Type mismatch.")
                         return
                 elif op=="*":
-                    if nstr.isnumeric():
+                    if type(nstr) is int:
                         VAcc[int(CBUF)]*=int(nstr)
                     else:
                         print("Error : Type mismatch.")
                         return
                 elif op=="/":
-                    if nstr.isnumeric():
+                    if type(nstr) is int:
                         if nstr==0:
                             print("Error: Divide by zero.")
                             return
@@ -238,6 +238,10 @@ def Waduzitdo(source):
                     else:
                         print("Error : expecting numeric literal.")
                         return
+            elif CBUF=="C":
+                while Loc<End and CBUF!="\r" and CBUF!="\n":
+                         Loc+=1
+                         CBUF = source[Loc]
 
             else:
                 CBUF=source[Loc]
