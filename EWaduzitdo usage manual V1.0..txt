@@ -1,4 +1,4 @@
-EWaduzitdo usage manual V1.0.
+EWaduzitdo usage manual V1.1.
 By Petar Jovanovic
 <c> 2024-2030 JP Programi
 
@@ -103,6 +103,10 @@ D:0
 * Stopping the program
 
 Stopping the program is done with the S: command.
+
+* Comments
+
+You can now use comments using the C: command. Write anything you want! It will be skipped, but you can tell other programmers what your code means!
 
 
 
